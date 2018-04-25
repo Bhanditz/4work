@@ -61,8 +61,11 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/ErrorTextStyle"
                 app:hintTextAppearance="@style/HintTextStyle">
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tie_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
