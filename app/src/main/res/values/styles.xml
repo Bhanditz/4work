@@ -44,6 +44,6 @@
     </style>
     <style name="CardViewStyle">
         <item name="cardBackgroundColor">@color/white</item>
-        <item name="cardCornerRadius">2dp</item>
+        <item name="cardCornerRadius">5dp</item>
     </style>
 </resources>

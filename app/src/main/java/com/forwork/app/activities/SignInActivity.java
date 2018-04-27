@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.forwork.app.R;
@@ -18,6 +19,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextInputLayout passwordTextInputLayout;
     private TextInputEditText passwordTextInputEditText;
     private ImageView enterImageView;
+    private Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,43 +36,52 @@ public class SignInActivity extends AppCompatActivity {
         passwordTextInputLayout = findViewById(R.id.til_password);
         passwordTextInputEditText = findViewById(R.id.tie_password);
         enterImageView = findViewById(R.id.ivw_enter);
+        signUpButton = findViewById(R.id.btn_sign_up);
     }
 
     private void configure() {
-        enterImageView.setOnClickListener(new View.OnClickListener() {
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                String email = emailTextInputEditText.getText().toString();
+                if (!TextUtils.isEmpty(email)) {
+                    intent.putExtra("email", email);
+                }
+                startActivity(intent);
+            }
+        });
+
+        enterImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 if (validate()) {
-                    Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-                    startActivity(intent);
+                    //TODO
                 }
             }
         });
     }
 
     private boolean validate() {
+        emailTextInputLayout.setError(null);
+        passwordTextInputLayout.setError(null);
+
         if (TextUtils.isEmpty(emailTextInputEditText.getText())) {
             emailTextInputLayout.setError(getString(R.string.msg_empty_field));
             emailTextInputEditText.requestFocus();
             return false;
-        } else {
-            emailTextInputLayout.setError(null);
         }
 
         if (!ValidationHelper.isEmailValid(emailTextInputEditText.getText())) {
             emailTextInputLayout.setError(getString(R.string.msg_invalid_email));
             emailTextInputEditText.requestFocus();
             return false;
-        } else {
-            emailTextInputLayout.setError(null);
         }
 
         if (TextUtils.isEmpty(passwordTextInputEditText.getText())) {
             passwordTextInputLayout.setError(getString(R.string.msg_empty_field));
             passwordTextInputEditText.requestFocus();
             return false;
-        } else {
-            passwordTextInputLayout.setError(null);
         }
 
         return true;
