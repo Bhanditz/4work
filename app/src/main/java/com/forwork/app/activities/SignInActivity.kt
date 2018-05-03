@@ -28,7 +28,9 @@ class SignInActivity : AppCompatActivity() {
 
         ivw_enter!!.setOnClickListener {
             if (validate()) {
-                //TODO
+                val intent = Intent(this, TimeSheetActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
     }
